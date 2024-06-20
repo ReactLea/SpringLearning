@@ -30,6 +30,7 @@ public class Controller {
 	public ResponseEntity<AuthenticationResponse> register(@RequestBody User user){
 		System.out.println("Inside the register");
 		AuthenticationResponse authresponse = authservice.register(user);
+		System.out.println("Inside the register After call");
 		return ResponseEntity.ok(authresponse);
 		
 	}
