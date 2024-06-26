@@ -1,33 +1,33 @@
 package com.example.springsecurityLearning.LearningSpring.Entity;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-@Entity
-@Table(name = "token")
+import lombok.Data;
+
+@Document(collection = "token")
+@Data
 public class Token {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    private String id;
 
-    @Column(name = "access_token")
     private String accessToken;
 
-    @Column(name = "refresh_token")
     private String refreshToken;
 
-    @Column(name = "is_logged_out")
     private boolean loggedOut;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+ //   @ManyToOne
+//    @JoinColumn(name = "user_id")
+    @DocumentReference(lazy = true)  
     private User user;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

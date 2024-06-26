@@ -3,59 +3,64 @@ package com.example.springsecurityLearning.LearningSpring.Entity;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.mongodb.lang.NonNull;
+
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Generated;
 
 
-@Entity
-@Table(name="user")
+@Document(collection = "user")
+@Data
+@Builder
 public class User implements UserDetails {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
-	
-	@Column(name = "firstname")
+	@org.springframework.data.annotation.Id
+	private String id;	
+	 @NonNull
 	private String firstName;
 
-	@Column(name = "lastname")
+	 @NonNull
 	private String lastName;
 	
-	 @Column(name = "username")
-	  private String username;
+	 @NonNull
+	private String username;
 	
-	@Column(name = "password")
 	private String password;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "role")
+	//@Generated(EnumType.STRING)
 	private Role role; 
 	
-	@OneToMany(mappedBy = "user")
-    private List<Token> tokens;
+//	@OneToMany(mappedBy = "user")
+//    private List<Token> tokens;
+	public User() {
+		
+	}
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
+	}
+
+	
+
+	public User(String id, String firstName, String lastName, String username, String password, Role role) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.role = role;
 	}
 
 	public String getFirstName() {

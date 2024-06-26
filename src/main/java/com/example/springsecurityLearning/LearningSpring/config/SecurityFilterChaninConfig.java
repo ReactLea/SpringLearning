@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,15 +18,14 @@ import com.example.springsecurityLearning.LearningSpring.filter.JwtAuthenticatio
 import com.example.springsecurityLearning.LearningSpring.service.UserDetailsServiceImpl;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig {
+public class SecurityFilterChaninConfig {
 	private final UserDetailsServiceImpl userDetailsServiceImp;
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
 	
 	
  
 	
-    public SecurityConfig(UserDetailsServiceImpl userDetailsServiceImp,
+    public SecurityFilterChaninConfig(UserDetailsServiceImpl userDetailsServiceImp,
 			JwtAuthenticationFilter jwtAuthenticationFilter) {
 		super();
 		this.userDetailsServiceImp = userDetailsServiceImp;
@@ -66,5 +64,6 @@ public class SecurityConfig {
 	    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 	        return configuration.getAuthenticationManager();
 	    }
+
 
 }
